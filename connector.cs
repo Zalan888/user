@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 
 namespace user
 {
     internal class Connector
     {
-    
-        public static void Connect()
-        {
-            // connect to the database on localhost
-            string connString = "Server=localhost;Port=3306";
-            MySqlConnection conn = new MySqlConnection(connString);
-            try
-            {
-                conn.Open();
-                Console.WriteLine("Connected to the database");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
 
-            
+        public static Connect conn = new Connect();
+        public class Connect
+        {
+            public MySqlConnection Connection;
+            public string Host;
+            public string Database;
+            public string User;
+            public string Password;
+            public string ConnectionString;
+
+
+            public Connect()
+            {
+                Host = "localhost";
+                Database = "user";
+                User = "root";
+                Password = "";
+                ConnectionString = "SERVER=" + Host + ";DATABASE=" + Database + ";UID=" + User + ";PASSWORD=" + Password + ";SslMode=None";
+                Connection = new MySqlConnection(ConnectionString);
+
+            }
         }
     }
 }
